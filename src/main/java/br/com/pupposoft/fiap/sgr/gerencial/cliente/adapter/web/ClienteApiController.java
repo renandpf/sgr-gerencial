@@ -27,7 +27,7 @@ public class ClienteApiController {
 	private ClienteController clienteController;
 	
 	@GetMapping("clientes/cpf/{cpf}")
-	public ClienteJson obterPorCpf(@PathVariable String cpf) {
+	public ClienteJson obterPorCpf(@PathVariable("cpf") String cpf) {
 		log.trace("Start cpf={}", cpf);
 		ClienteDto clienteDto = clienteController.obterPorCpf(cpf);
 		ClienteJson clienteJson = mapDtoToJson(clienteDto);
@@ -36,7 +36,7 @@ public class ClienteApiController {
 	}
 
 	@GetMapping("clientes/email/{email}")
-	public ClienteJson obterPorEmail(@PathVariable String email) {
+	public ClienteJson obterPorEmail(@PathVariable("email") String email) {
 		log.trace("Start email={}", email);
 		ClienteDto clienteDto = clienteController.obterPorEmail(email);
 		ClienteJson clienteJson = mapDtoToJson(clienteDto);
@@ -54,7 +54,7 @@ public class ClienteApiController {
 	}
 
 	@PutMapping("clientes/{id}")
-	public void alterarCliente(@RequestBody(required = true) ClienteJson clienteJson, @PathVariable Long id){
+	public void alterarCliente(@RequestBody(required = true) ClienteJson clienteJson, @PathVariable("id") Long id){
 		log.trace("Start clienteJson={}, id={}", clienteJson, id);
 		clienteController.alterar(mapJsonToDto(id, clienteJson));
 		log.trace("End");
@@ -62,7 +62,7 @@ public class ClienteApiController {
 
 	
 	@GetMapping("clientes/{clienteId}")
-	public ClienteJson obterById(@PathVariable Long clienteId) {
+	public ClienteJson obterById(@PathVariable("clienteId") Long clienteId) {
 		log.trace("Start clienteId={}", clienteId);
 		ClienteDto clienteDto = clienteController.obterById(clienteId);
 		ClienteJson clienteJson = mapDtoToJson(clienteDto);
