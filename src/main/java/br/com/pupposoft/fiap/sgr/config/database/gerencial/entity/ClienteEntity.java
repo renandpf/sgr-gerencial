@@ -1,13 +1,9 @@
 package br.com.pupposoft.fiap.sgr.config.database.gerencial.entity;
 
-import java.util.List;
-
-import br.com.pupposoft.fiap.sgr.config.database.pedido.entity.PedidoEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +23,4 @@ public class ClienteEntity {
     private String nome;
     private String cpf;
     private String email;
-
-    @OneToMany(mappedBy = "cliente")
-    private List<PedidoEntity> pedidos;
-
 }

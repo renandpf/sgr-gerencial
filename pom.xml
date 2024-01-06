@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.wehandle</groupId>
 	<artifactId>sgr-gerencial</artifactId>
-	<version>2.1.0-RELEASE</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
-	<name>Sistema de Gestão de Visitas - Service</name>
+	<name>Sistema de Gestão de Refeição - Gerencial Service</name>
 
 	<dependencyManagement>
 		<dependencies>
@@ -68,37 +68,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt-api</artifactId>
-    		<version>0.11.5</version>
-		</dependency>
-		
-		<dependency>
-    		<groupId>io.jsonwebtoken</groupId>
-    		<artifactId>jjwt-impl</artifactId>
-    		<version>0.11.5</version>
-    		<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version>
-            <scope>runtime</scope>
-        </dependency>
-
-		<dependency>
-		    <groupId>javax.xml.bind</groupId>
-		    <artifactId>jaxb-api</artifactId>
-		    <version>2.4.0-b180830.0359</version>
 		</dependency>
 
 		<dependency>

@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 
 @SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class })
-public class SgrService {
+public class SgrGerencialService {
     public static void main(String[] args) {
     	Locale.setDefault(new Locale( "pt", "BR" ));
-        SpringApplication.run(SgrService.class, args);
+        SpringApplication.run(SgrGerencialService.class, args);
     }
 }
