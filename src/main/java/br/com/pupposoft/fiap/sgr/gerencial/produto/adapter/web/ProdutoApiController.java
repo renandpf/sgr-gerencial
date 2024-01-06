@@ -31,7 +31,7 @@ public class ProdutoApiController {
 	private ProdutoController produtoController;
 	
 	@GetMapping("categorias/{categoria}/produtos")
-	public List<ProdutoJson> obterPorCategoria(@PathVariable Categoria categoria) {
+	public List<ProdutoJson> obterPorCategoria(@PathVariable("categoria") Categoria categoria) {
 		log.trace("Start categoria={}", categoria);
 		List<ProdutoDto> produtos = produtoController.obterPorCategoria(categoria);
 		List<ProdutoJson> produtosJson = produtos.stream().map(this::mapDtoToJson).toList();
@@ -40,7 +40,7 @@ public class ProdutoApiController {
 	}
 
 	@GetMapping("produtos/{id}")
-	public ProdutoJson obterById(@PathVariable Long id) {
+	public ProdutoJson obterById(@PathVariable("id") Long id) {
 		log.trace("Start id={}", id);
 		ProdutoDto produtoDto = produtoController.obterById(id);
 		ProdutoJson produtoJson = mapDtoToJson(produtoDto);
@@ -58,14 +58,14 @@ public class ProdutoApiController {
 	}
 
 	@PutMapping("produtos/{id}")
-	public void alterar(@PathVariable Long id, @RequestBody(required = true) ProdutoJson produtoJson){
+	public void alterar(@PathVariable("id") Long id, @RequestBody(required = true) ProdutoJson produtoJson){
 		log.trace("Start id={}, produtoJson={}", id, produtoJson);
 		produtoController.alterar(mapJsonToDto(id, produtoJson));
 		log.trace("End");
 	}
 
 	@DeleteMapping("produtos/{id}")
-	public void excluir(@PathVariable Long id) {
+	public void excluir(@PathVariable("id") Long id) {
 		log.trace("Start id={}", id);
 		produtoController.excluir(id);
 		log.trace("End");
