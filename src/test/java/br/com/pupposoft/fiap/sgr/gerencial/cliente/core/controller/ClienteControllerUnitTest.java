@@ -108,10 +108,6 @@ class ClienteControllerUnitTest {
 		
 		assertEquals(clienteDtoExistent, clienteDtoReturned);
 		
-		ArgumentCaptor<AlterarClienteParamsDto> clienteParamsDtoAC = ArgumentCaptor.forClass(AlterarClienteParamsDto.class);
-		verify(alterarClienteUseCase).alterar(clienteParamsDtoAC.capture());
-		
-		AlterarClienteParamsDto alterarClienteParamsDtoCaptured = clienteParamsDtoAC.getValue();
-		
+		verify(obterClienteUseCase).obterPorId(clienteId);
 	}
 }
