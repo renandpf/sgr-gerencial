@@ -1,5 +1,6 @@
 package br.com.pupposoft.fiap.sgr.gerencial.cliente.core.domain;
 
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.exception.ClienteValidacaoException;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,13 +11,10 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String email;
-//    private Usuario usuario;
-//    private List<Pedido> pedidos;
 	
     public void validar() {
-    	if (this.cpf == null) {
-        	//FIXME
-            //throw new ClienteValidacaoException("CPF é obrigatório");
+    	if (cpf == null || cpf.isBlank()) {
+    		throw new ClienteValidacaoException("CPF é obrigatório");
         }
 	}
 }
