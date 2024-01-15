@@ -19,7 +19,7 @@ public class AlterarClienteUsecaseImpl implements AlterarClienteUsecase {
 
 	public AlterarClienteReturnDto alterar(AlterarClienteParamsDto paramsDto) {
 		log.trace("Start paramsDto={}", paramsDto);
-        Cliente cliente = this.mapDtoToDomain(paramsDto.getCliente());
+        Cliente cliente = mapDtoToDomain(paramsDto.getCliente());
 
         cliente.validar();
 
