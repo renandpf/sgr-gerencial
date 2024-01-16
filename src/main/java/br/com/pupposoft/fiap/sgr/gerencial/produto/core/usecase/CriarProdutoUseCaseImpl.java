@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class CriarProdutoUseCaseImpl implements CriarProdutoUseCase {
 
-	private ProdutoGateway produtoRepositoryGateway;
+	private ProdutoGateway produtoGateway;
 	
 	@Override
 	public CriarProdutoReturnDto criar(CriarProdutoParamsDto dto) {
@@ -20,7 +20,7 @@ public class CriarProdutoUseCaseImpl implements CriarProdutoUseCase {
 
         this.validar(dto.getProduto());
 
-        Long id = this.produtoRepositoryGateway.criar(dto.getProduto());
+        Long id = this.produtoGateway.criar(dto.getProduto());
         CriarProdutoReturnDto returnDto = CriarProdutoReturnDto.builder().id(id).build();
         log.trace("End returnDto={}", returnDto);
         return returnDto;
