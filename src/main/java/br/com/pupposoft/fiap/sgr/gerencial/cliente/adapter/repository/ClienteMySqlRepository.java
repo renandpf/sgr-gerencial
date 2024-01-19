@@ -29,7 +29,7 @@ public class ClienteMySqlRepository implements ClienteGateway {
 	public Optional<ClienteDto> obterPorCpf(String cpf) {
 		try {
 			log.trace("Start cpf={}", cpf);
-			Optional<ClienteEntity> clientEntityOp = this.clienteEntityRepository.findByCpf(cpf);
+			Optional<ClienteEntity> clientEntityOp = clienteEntityRepository.findByCpf(cpf);
 			Optional<ClienteDto> clienteDtoOp = mapEntityOpToDtoOp(clientEntityOp);
 			log.trace("End clienteDtoOp={}", clienteDtoOp);
 			return clienteDtoOp;
