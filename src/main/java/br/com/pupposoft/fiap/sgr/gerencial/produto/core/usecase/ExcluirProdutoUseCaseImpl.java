@@ -18,7 +18,7 @@ public class ExcluirProdutoUseCaseImpl implements ExcluirProdutoUseCase {
         log.trace("End");
 	}
 
-    //TODO: este método deveria chamar o service de Pedido
+    //TODO: DEBITO TÉCNICO este método deve chamar o service de Pedido
 	private void verificaSeProdutoEstaAssociadoItem(Long id) {
         // const existePedido = await this.produtoRepositoryGateway.existePedidoByProdutoId(id);
         // if (existePedido) {

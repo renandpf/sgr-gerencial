@@ -14,13 +14,13 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class ObterProdutoUseCaseImpl implements ObterProdutoUseCase {
 
-	private ProdutoGateway produtoRepositoryGateway;
+	private ProdutoGateway produtoGateway;
 	
 	@Override
 	public ProdutoDto obterPorId(Long id) {
         log.trace("Start id={}", id);
 
-        Optional<ProdutoDto> produtoFoundOp = produtoRepositoryGateway.obterPorId(id);
+        Optional<ProdutoDto> produtoFoundOp = produtoGateway.obterPorId(id);
         if (produtoFoundOp.isEmpty()) {
             log.warn("Produto not found: {}", id);
             throw new ProdutoNaoEncontradoException();
@@ -34,7 +34,7 @@ public class ObterProdutoUseCaseImpl implements ObterProdutoUseCase {
 	@Override
 	public List<ProdutoDto> obterPorCategoria(Categoria categoria) {
         log.trace("Start categoria={}", categoria);
-        List<ProdutoDto> produtos = this.produtoRepositoryGateway.obterPorCategoria(categoria);
+        List<ProdutoDto> produtos = this.produtoGateway.obterPorCategoria(categoria);
         log.trace("End produtos={}", produtos);
         return produtos;
 	}
