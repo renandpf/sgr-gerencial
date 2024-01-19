@@ -8,13 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class ExcluirProdutoUseCaseImpl implements ExcluirProdutoUseCase {
 
-	private ProdutoGateway produtoRepositoryGateway;
+	private ProdutoGateway produtoGateway;
 	
 	@Override
 	public void excluir(Long id) {
         log.trace("Start id={}", id);
         this.verificaSeProdutoEstaAssociadoItem(id);
-        this.produtoRepositoryGateway.excluir(id);
+        this.produtoGateway.excluir(id);
         log.trace("End");
 	}
 
