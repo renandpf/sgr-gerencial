@@ -10,11 +10,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.controller.ClienteController;
-import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.gateway.ClienteGateway;
-import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUsecase;
-import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecase;
-import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.controller.ProdutoController;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.gateway.ProdutoGateway;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.usecase.AlterarProdutoUseCase;
