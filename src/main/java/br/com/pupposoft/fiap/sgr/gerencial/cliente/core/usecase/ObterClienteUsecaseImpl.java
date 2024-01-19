@@ -12,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class ObterClienteUsecaseImpl implements ObterClienteUsecase {
 
-	private ClienteGateway clienteRepositoryGateway;
+	private ClienteGateway clienteGateway;
 
 	@Override
 	public ClienteDto obterPorId(Long id) {
 		log.trace("Start id={}", id);
-		Optional<ClienteDto> clienteOp = this.clienteRepositoryGateway.obterPorId(id);
+		Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorId(id);
 		ClienteDto clienteDto = this.getClienteDto(clienteOp);
 		log.trace("End clienteDto={}", clienteDto);
         return clienteDto;
@@ -26,7 +26,7 @@ public class ObterClienteUsecaseImpl implements ObterClienteUsecase {
 	@Override
 	public ClienteDto obterPorCpf(String cpf) {
 		log.trace("Start cpf={}", cpf);
-		Optional<ClienteDto> clienteOp = this.clienteRepositoryGateway.obterPorCpf(cpf);
+		Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorCpf(cpf);
 		ClienteDto clienteDto = this.getClienteDto(clienteOp);
 		log.trace("End clienteDto={}", clienteDto);
 		log.trace("End clienteDto={}", clienteDto);
@@ -36,7 +36,7 @@ public class ObterClienteUsecaseImpl implements ObterClienteUsecase {
 	@Override
 	public ClienteDto obterPorEmail(String email) {
 		log.trace("Start email={}", email);
-		Optional<ClienteDto> clienteOp = this.clienteRepositoryGateway.obterPorEmail(email);
+		Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorEmail(email);
 		ClienteDto clienteDto = this.getClienteDto(clienteOp);
 		log.trace("End clienteDto={}", clienteDto);
         return clienteDto;
