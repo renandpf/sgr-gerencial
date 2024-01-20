@@ -56,9 +56,9 @@ jobs:
           args:
             # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
             # mandatory
-            -Dsonar.projectKey=renandpf_sgr-service-spring
+            -Dsonar.projectKey=renandpf_sgr-gerencial
             -Dsonar.organization=renandpf
-            -Dsonar.projectName='sgr-service-spring'
+            -Dsonar.projectName='sgr-gerencial'
             -Dsonar.qualitygate.wait=true
             #-Dsonar.host.url=http://localhost:9000
             #-Dsonar.token=squ_dac055f94e793a46a93b293f05f9925735fba07a
