@@ -1,6 +1,8 @@
 package br.com.pupposoft.fiap.sgr.gerencial.cliente.adapter.repository;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -19,6 +21,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ClienteEntity;
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.repository.ClienteEntityRepository;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.ClienteDto;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.AlterarClienteParamsDto;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.AlterarClienteReturnDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteParamsDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteReturnDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.exception.ErrorToAccessRepositoryException;
@@ -57,6 +61,19 @@ class ClienteMySqlRepositoryUnitTest {
 		assertEquals(clienteEntityExistente.getNome(), clienteDto.getNome());
 		assertEquals(clienteEntityExistente.getCpf(), clienteDto.getCpf());
 		assertEquals(clienteEntityExistente.getEmail(), clienteDto.getEmail());
+	}
+	
+	@Test
+	void shouldSucessButNotFounfOnObterPorCpf() {
+		final String cpfParam = DataBuilderBase.getRandomString();
+		
+		doReturn(Optional.empty()).when(clienteEntityRepository).findByCpf(cpfParam);
+		
+		Optional<ClienteDto> clientFoundOP = clienteGateway.obterPorCpf(cpfParam);
+		
+		assertTrue(clientFoundOP.isEmpty());
+		
+		verify(clienteEntityRepository).findByCpf(cpfParam);
 	}
 	
 	@Test
@@ -173,6 +190,49 @@ class ClienteMySqlRepositoryUnitTest {
 		CriarClienteParamsDto criarClienteParamsDto = CriarClienteParamsDto.builder().cliente(ClienteDto.builder().build()).build();
 		
 		assertThrows(ErrorToAccessRepositoryException.class, () -> clienteGateway.criar(criarClienteParamsDto));
+		verify(clienteEntityRepository).save(any(ClienteEntity.class));
+	}
+
+	@Test
+	void shouldSucessOnAlterar() {
+		
+		ClienteDto clienteToBeUpdate = ClienteDto.builder()
+				.id(DataBuilderBase.getRandomLong())
+				.nome(DataBuilderBase.getRandomString())
+				.cpf(DataBuilderBase.getRandomString())
+				.email(DataBuilderBase.getRandomString())
+				.build();
+		
+		AlterarClienteParamsDto alterarClienteParamsDto = AlterarClienteParamsDto.builder()
+				.cliente(clienteToBeUpdate)
+				.build();
+		
+		ClienteEntity clienteEntity = ClienteEntity.builder().id(clienteToBeUpdate.getId()).build(); 
+		doReturn(clienteEntity).when(clienteEntityRepository).save(any(ClienteEntity.class));
+		
+		AlterarClienteReturnDto returnDto = clienteGateway.alterar(alterarClienteParamsDto);
+
+		assertNotNull(returnDto);
+		
+		ArgumentCaptor<ClienteEntity> clientEntityAC = ArgumentCaptor.forClass(ClienteEntity.class);
+		
+		verify(clienteEntityRepository).save(clientEntityAC.capture());
+		
+		ClienteEntity clientEntitySaved = clientEntityAC.getValue();
+		
+		assertEquals(clienteToBeUpdate.getId(), clientEntitySaved.getId());
+		assertEquals(clienteToBeUpdate.getNome(), clientEntitySaved.getNome());
+		assertEquals(clienteToBeUpdate.getCpf(), clientEntitySaved.getCpf());
+		assertEquals(clienteToBeUpdate.getEmail(), clientEntitySaved.getEmail());
+	}
+	
+	@Test
+	void shouldErrorToAlterar() {
+		doThrow(new RuntimeException()).when(clienteEntityRepository).save(any(ClienteEntity.class));
+		
+		AlterarClienteParamsDto alterarClienteParamsDto = AlterarClienteParamsDto.builder().cliente(ClienteDto.builder().build()).build();
+		
+		assertThrows(ErrorToAccessRepositoryException.class, () -> clienteGateway.alterar(alterarClienteParamsDto));
 		verify(clienteEntityRepository).save(any(ClienteEntity.class));
 	}
 	
