@@ -70,7 +70,7 @@ jobs:
           -Dsonar.projectName=${{ env.PROJECT_NAME }} 
           -Dsonar.host.url=${{ env.SONAR_HOST }} 
           -Dsonar.token=${{ env.SONAR_TOKEN }}
-          -Dsonar.coverage.exclusions=br/com/pupposoft/fiap/SgrGerencialService,br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ProdutoEntity,br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ClienteEntity
+          -Dsonar.coverage.exclusions=src/main/java/br/com/pupposoft/fiap/SgrGerencialService.java,br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ProdutoEntity,br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ClienteEntity
           
           "
           mvn clean verify sonar:sonar
