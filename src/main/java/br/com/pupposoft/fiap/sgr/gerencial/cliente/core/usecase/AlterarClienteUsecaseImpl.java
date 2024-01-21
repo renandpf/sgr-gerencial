@@ -18,7 +18,6 @@ public class AlterarClienteUsecaseImpl implements AlterarClienteUsecase {
 	private ClienteGateway clienteGateway;
 
 	public AlterarClienteReturnDto alterar(AlterarClienteParamsDto paramsDto) {
-		log.trace("Start paramsDto={}", paramsDto);
         Cliente cliente = mapDtoToDomain(paramsDto.getCliente());
 
         cliente.validar();
@@ -30,10 +29,7 @@ public class AlterarClienteUsecaseImpl implements AlterarClienteUsecase {
             throw new ClienteNaoEncontradoException();
         }
         
-        AlterarClienteReturnDto returnDto = this.clienteGateway.alterar(paramsDto);
-        
-        log.trace("End returnDto={}", returnDto);
-        return returnDto;
+        return this.clienteGateway.alterar(paramsDto);
 	}
 	
     private Cliente mapDtoToDomain(ClienteDto dto)  {

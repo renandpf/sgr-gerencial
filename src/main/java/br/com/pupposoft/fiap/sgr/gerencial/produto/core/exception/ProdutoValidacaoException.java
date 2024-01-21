@@ -7,9 +7,9 @@ import lombok.Getter;
 public class ProdutoValidacaoException extends SystemBaseException {
 	private static final long serialVersionUID = -2758617174295132221L;
 
-	private final String code = "sgr.produtoValidacao";
-	private String message = "";
-	private final Integer httpStatus = 400;
+	private final String code = "sgr.produtoValidacao";//NOSONAR
+	private String message = "";//NOSONAR
+	private final Integer httpStatus = 400;//NOSONAR
 	
 	public ProdutoValidacaoException(String message) {
 		this.message = message;

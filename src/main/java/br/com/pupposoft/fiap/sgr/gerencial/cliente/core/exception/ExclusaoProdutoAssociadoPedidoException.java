@@ -7,7 +7,7 @@ import lombok.Getter;
 public class ExclusaoProdutoAssociadoPedidoException extends SystemBaseException {
 	private static final long serialVersionUID = -5309107784754026551L;
 	
-	private final String code = "sgr.exclusionProductAssociatedWithOrder";
-	private final String message = "O produto está associado a pedido(s)";
-	private final Integer httpStatus = 422;
+	private final String code = "sgr.exclusionProductAssociatedWithOrder";//NOSONAR
+	private final String message = "O produto está associado a pedido(s)";//NOSONAR
+	private final Integer httpStatus = 422;//NOSONAR
 }

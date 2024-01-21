@@ -13,11 +13,12 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsec
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecaseImpl;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecaseImpl;
+import lombok.AllArgsConstructor;
 
 @Configuration
+@AllArgsConstructor
 public class GerencialClienteDIConfiguration {
 
-	@Autowired
 	private ClienteGateway clienteGateway;
 	
 	@Bean

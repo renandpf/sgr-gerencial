@@ -2,9 +2,7 @@ package br.com.pupposoft.fiap.sgr.gerencial.produto.core.usecase;
 
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.gateway.ProdutoGateway;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @AllArgsConstructor
 public class ExcluirProdutoUseCaseImpl implements ExcluirProdutoUseCase {
 
@@ -12,10 +10,8 @@ public class ExcluirProdutoUseCaseImpl implements ExcluirProdutoUseCase {
 	
 	@Override
 	public void excluir(Long id) {
-        log.trace("Start id={}", id);
         this.verificaSeProdutoEstaAssociadoItem(id);
         this.produtoGateway.excluir(id);
-        log.trace("End");
 	}
 
     //TODO: DEBITO TÉCNICO este método deve chamar o service de Pedido

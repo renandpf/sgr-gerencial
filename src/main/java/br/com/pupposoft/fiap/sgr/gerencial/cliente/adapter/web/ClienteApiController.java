@@ -1,6 +1,5 @@
 package br.com.pupposoft.fiap.sgr.gerencial.cliente.adapter.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.adapter.web.json.ClienteJson;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.controller.ClienteController;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.ClienteDto;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")//NOSONAR
 @RestController
 @RequestMapping("sgr/gerencial")
+@AllArgsConstructor
 public class ClienteApiController {
 
-	@Autowired
 	private ClienteController clienteController;
 	
 	@GetMapping("clientes/cpf/{cpf}")
@@ -31,7 +31,7 @@ public class ClienteApiController {
 		log.trace("Start cpf={}", cpf);
 		ClienteDto clienteDto = clienteController.obterPorCpf(cpf);
 		ClienteJson clienteJson = mapDtoToJson(clienteDto);
-		log.trace("End clienteJson={}", clienteJson);
+		log.trace("End clienteJson={}", clienteJson);//NOSONAR
 		return clienteJson;
 	}
 

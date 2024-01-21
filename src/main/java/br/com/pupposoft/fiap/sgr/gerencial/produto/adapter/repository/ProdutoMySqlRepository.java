@@ -3,7 +3,6 @@ package br.com.pupposoft.fiap.sgr.gerencial.produto.adapter.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ProdutoEntity;
@@ -12,28 +11,23 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.exception.ErrorToAccessR
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.domain.Categoria;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.dto.ProdutoDto;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.gateway.ProdutoGateway;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class ProdutoMySqlRepository implements ProdutoGateway {
 
-	@Autowired
 	private ProdutoEntityRepository produtoEntityRepository;
 
 	@Override
 	public Optional<ProdutoDto> obterPorId(Long produtoId) {
 		try {
-			log.trace("Start produtoId={}", produtoId);
 			Optional<ProdutoEntity> produtoEntityOp = produtoEntityRepository.findById(produtoId);
 
-			Optional<ProdutoDto> produtoOp = 
-					produtoEntityOp.isEmpty() ? 
+			return produtoEntityOp.isEmpty() ? 
 							Optional.empty(): Optional.of(mapEntityToDto(produtoEntityOp.get()));
-
-
-			log.trace("End produtoOp={}", produtoOp);
-			return produtoOp;
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -44,11 +38,8 @@ public class ProdutoMySqlRepository implements ProdutoGateway {
 	@Override
 	public List<ProdutoDto> obterPorCategoria(Categoria categoria) {
         try {
-            log.trace("Start categoria={}", categoria);
             List<ProdutoEntity> produtosEntities = produtoEntityRepository.findByCategoriaId(categoria.ordinal());
-            List<ProdutoDto> produtosDto = produtosEntities.stream().map(this::mapEntityToDto).toList();
-            log.trace("End produtosDto={}", produtosDto);
-            return produtosDto;
+            return produtosEntities.stream().map(this::mapEntityToDto).toList();
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -59,11 +50,8 @@ public class ProdutoMySqlRepository implements ProdutoGateway {
 	@Override
 	public Long criar(ProdutoDto produtoDto) {
         try {
-            log.trace("Start produtoDto={}", produtoDto);
             ProdutoEntity produtoSavedEntity = produtoEntityRepository.save(mapDtoToEntity(produtoDto));
-            Long idProdutoCreated = produtoSavedEntity.getId();
-            log.trace("End idProdutoCreated={}", idProdutoCreated);
-            return idProdutoCreated;
+            return produtoSavedEntity.getId();
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -74,9 +62,7 @@ public class ProdutoMySqlRepository implements ProdutoGateway {
 	@Override
 	public void alterar(ProdutoDto produtoDto) {
         try {
-            log.trace("Start produtoDto={}", produtoDto);
             produtoEntityRepository.save(mapDtoToEntity(produtoDto));
-            log.trace("End");
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -87,9 +73,7 @@ public class ProdutoMySqlRepository implements ProdutoGateway {
 	@Override
 	public void excluir(Long produtoId) {
         try {
-            log.trace("Start id={}", produtoId);
             produtoEntityRepository.deleteById(produtoId);
-            log.trace("End");
         }
         catch (Exception e) {
             log.error(e.getMessage(), e);

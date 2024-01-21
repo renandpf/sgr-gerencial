@@ -16,14 +16,9 @@ public class CriarProdutoUseCaseImpl implements CriarProdutoUseCase {
 	
 	@Override
 	public CriarProdutoReturnDto criar(CriarProdutoParamsDto dto) {
-        log.trace("Start dto={}", dto);
-
         this.validar(dto.getProduto());
-
         Long id = this.produtoGateway.criar(dto.getProduto());
-        CriarProdutoReturnDto returnDto = CriarProdutoReturnDto.builder().id(id).build();
-        log.trace("End returnDto={}", returnDto);
-        return returnDto;
+        return CriarProdutoReturnDto.builder().id(id).build();
 	}
 
     private void validar(ProdutoDto produtoDto) {

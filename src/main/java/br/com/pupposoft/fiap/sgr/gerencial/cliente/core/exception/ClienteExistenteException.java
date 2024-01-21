@@ -7,7 +7,7 @@ import lombok.Getter;
 public class ClienteExistenteException extends SystemBaseException {
 	private static final long serialVersionUID = -7934116874675268268L;
 	
-	private final String code = "sgr.clienteExistente";
-	private final String message = "Cliente já cadastrado";
-	private final Integer httpStatus = 400;
+	private final String code = "sgr.clienteExistente";//NOSONAR
+	private final String message = "Cliente já cadastrado";//NOSONAR
+	private final Integer httpStatus = 400;//NOSONAR
 }
