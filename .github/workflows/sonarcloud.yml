@@ -49,7 +49,7 @@ jobs:
         with:
           java-version: '18'
           distribution: 'temurin'
-          cache: maven
+          # cache: maven
 
       - name: Analyze with SonarCloud
 
