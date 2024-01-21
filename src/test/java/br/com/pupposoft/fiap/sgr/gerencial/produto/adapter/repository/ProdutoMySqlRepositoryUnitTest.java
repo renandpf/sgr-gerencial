@@ -32,7 +32,7 @@ import br.com.pupposoft.fiap.test.databuilder.DataBuilderBase;
 class ProdutoMySqlRepositoryUnitTest {
 
 	@InjectMocks
-	private ProdutoGateway produtoGateway = new ProdutoMySqlRepository();
+	private ProdutoGateway produtoGateway = new ProdutoMySqlRepository(null);
 	
 	@Mock
 	private ProdutoEntityRepository produtoEntityRepository;

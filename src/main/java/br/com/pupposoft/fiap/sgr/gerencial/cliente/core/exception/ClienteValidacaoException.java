@@ -7,9 +7,9 @@ import lombok.Getter;
 public class ClienteValidacaoException extends SystemBaseException {
 	private static final long serialVersionUID = 1004353093504455169L;
 	
-	private final String code = "sgr.clienteValidacao";
-	private String message = "";
-	private final Integer httpStatus = 400;
+	private final String code = "sgr.clienteValidacao";//NOSONAR
+	private String message = "";//NOSONAR
+	private final Integer httpStatus = 400;//NOSONAR
 	
 	public ClienteValidacaoException(String message) {
 		this.message = message;

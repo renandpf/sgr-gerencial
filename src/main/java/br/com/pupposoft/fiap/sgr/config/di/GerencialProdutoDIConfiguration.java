@@ -15,11 +15,12 @@ import br.com.pupposoft.fiap.sgr.gerencial.produto.core.usecase.ExcluirProdutoUs
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.usecase.ExcluirProdutoUseCaseImpl;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.usecase.ObterProdutoUseCase;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.usecase.ObterProdutoUseCaseImpl;
+import lombok.AllArgsConstructor;
 
 @Configuration
+@AllArgsConstructor
 public class GerencialProdutoDIConfiguration {
 
-	@Autowired
 	private ProdutoGateway produtoGateway;
 	
 	@Bean

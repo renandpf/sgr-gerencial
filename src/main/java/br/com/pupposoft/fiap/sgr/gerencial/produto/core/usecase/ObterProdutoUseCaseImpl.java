@@ -18,24 +18,17 @@ public class ObterProdutoUseCaseImpl implements ObterProdutoUseCase {
 	
 	@Override
 	public ProdutoDto obterPorId(Long id) {
-        log.trace("Start id={}", id);
-
         Optional<ProdutoDto> produtoFoundOp = produtoGateway.obterPorId(id);
         if (produtoFoundOp.isEmpty()) {
             log.warn("Produto not found: {}", id);
             throw new ProdutoNaoEncontradoException();
         }
 
-        ProdutoDto produtoFound = produtoFoundOp.get();
-        log.trace("End produto={}", produtoFound);
-        return produtoFound;
+        return produtoFoundOp.get();
 	}
 
 	@Override
 	public List<ProdutoDto> obterPorCategoria(Categoria categoria) {
-        log.trace("Start categoria={}", categoria);
-        List<ProdutoDto> produtos = this.produtoGateway.obterPorCategoria(categoria);
-        log.trace("End produtos={}", produtos);
-        return produtos;
+        return this.produtoGateway.obterPorCategoria(categoria);
 	}
 }

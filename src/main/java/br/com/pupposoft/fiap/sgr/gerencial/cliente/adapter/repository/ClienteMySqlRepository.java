@@ -2,7 +2,6 @@ package br.com.pupposoft.fiap.sgr.gerencial.cliente.adapter.repository;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ClienteEntity;
@@ -22,17 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class ClienteMySqlRepository implements ClienteGateway {
 
-	@Autowired
 	private ClienteEntityRepository clienteEntityRepository; 
 
 	@Override
 	public Optional<ClienteDto> obterPorCpf(String cpf) {
 		try {
-			log.trace("Start cpf={}", cpf);
 			Optional<ClienteEntity> clientEntityOp = clienteEntityRepository.findByCpf(cpf);
-			Optional<ClienteDto> clienteDtoOp = mapEntityOpToDtoOp(clientEntityOp);
-			log.trace("End clienteDtoOp={}", clienteDtoOp);
-			return clienteDtoOp;
+			return mapEntityOpToDtoOp(clientEntityOp);
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -43,11 +38,8 @@ public class ClienteMySqlRepository implements ClienteGateway {
 	@Override
 	public AlterarClienteReturnDto alterar(AlterarClienteParamsDto paramsDto) {
 		try {
-			log.trace("Start paramsDto={}", paramsDto);
 			this.clienteEntityRepository.save(mapDtoToEntity(paramsDto.getCliente()));
-			AlterarClienteReturnDto returnDto = new AlterarClienteReturnDto();
-			log.trace("End returnDto={}", returnDto);
-			return returnDto;
+			return new AlterarClienteReturnDto();
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -58,11 +50,8 @@ public class ClienteMySqlRepository implements ClienteGateway {
 	@Override
 	public Optional<ClienteDto> obterPorEmail(String email) {
 		try {
-			log.trace("Start email={}", email);
 			Optional<ClienteEntity> clientEntityOp = this.clienteEntityRepository.findByEmail(email);
-			Optional<ClienteDto> clienteDtoOp = mapEntityOpToDtoOp(clientEntityOp);
-			log.trace("End clienteDtoOp={}", clienteDtoOp);
-			return clienteDtoOp;
+			return mapEntityOpToDtoOp(clientEntityOp);
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -73,11 +62,8 @@ public class ClienteMySqlRepository implements ClienteGateway {
 	@Override
 	public CriarClienteReturnDto criar(CriarClienteParamsDto paramsDto) {
 		try {
-			log.trace("Start paramsDto={}", paramsDto);
 			ClienteEntity clientEntity = this.clienteEntityRepository.save(mapDtoToEntity(paramsDto.getCliente()));
-			CriarClienteReturnDto returnDto = CriarClienteReturnDto.builder().clienteId(clientEntity.getId()).build();
-			log.trace("End returnDto={}", returnDto);
-			return returnDto;
+			return CriarClienteReturnDto.builder().clienteId(clientEntity.getId()).build();
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -88,11 +74,8 @@ public class ClienteMySqlRepository implements ClienteGateway {
 	@Override
 	public Optional<ClienteDto> obterPorId(Long id) {
 		try {
-			log.trace("Start id={}", id);
 			Optional<ClienteEntity> clientEntityOp = this.clienteEntityRepository.findById(id);
-			Optional<ClienteDto> clienteDtoOp = mapEntityOpToDtoOp(clientEntityOp);
-			log.trace("End clienteDtoOp={}", clienteDtoOp);
-			return clienteDtoOp;
+			return mapEntityOpToDtoOp(clientEntityOp);
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -101,13 +84,8 @@ public class ClienteMySqlRepository implements ClienteGateway {
 	}
 
 	private Optional<ClienteDto> mapEntityOpToDtoOp(Optional<ClienteEntity> clientEntityOp) {
-		Optional<ClienteDto> clienteDtoOp = Optional.empty();
-		if(clientEntityOp.isPresent()) {
-			clienteDtoOp = Optional.of(mapEntityToDto(clientEntityOp.get()));
-		}
-		return clienteDtoOp;
+		return clientEntityOp.isPresent() ? Optional.of(mapEntityToDto(clientEntityOp.get())) : Optional.empty();
 	}
-
 	
 	private ClienteEntity mapDtoToEntity(ClienteDto dto) {
 		

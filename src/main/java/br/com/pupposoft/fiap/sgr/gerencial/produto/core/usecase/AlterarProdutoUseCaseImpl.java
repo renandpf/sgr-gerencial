@@ -4,9 +4,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.produto.core.dto.flow.AlterarProdutoP
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.dto.flow.AlterarProdutoReturnDto;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.gateway.ProdutoGateway;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @AllArgsConstructor
 public class AlterarProdutoUseCaseImpl implements AlterarProdutoUseCase {
 
@@ -14,11 +12,8 @@ public class AlterarProdutoUseCaseImpl implements AlterarProdutoUseCase {
 	
 	@Override
 	public AlterarProdutoReturnDto alterar(AlterarProdutoParamsDto dto) {
-        log.trace("Start dto={}", dto);
         this.produtoGateway.alterar(dto.getProduto());
-        AlterarProdutoReturnDto returnDto = new AlterarProdutoReturnDto();
-        log.trace("End returnDto={}", returnDto);
-        return returnDto;
+        return new AlterarProdutoReturnDto();
 	}
 
 }

@@ -19,7 +19,6 @@ public class CriarClienteUsecaseImpl implements CriarClienteUsecase {
 
 	@Override
 	public CriarClienteReturnDto criar(CriarClienteParamsDto dto) {
-		log.trace("Start dto={}", dto);
         Cliente clienteReq = this.mapDtoToDomain(dto.getCliente());
 
         clienteReq.validar();
@@ -31,10 +30,7 @@ public class CriarClienteUsecaseImpl implements CriarClienteUsecase {
             throw new ClienteExistenteException();
         }
 
-        CriarClienteReturnDto returnDto = this.clienteGateway.criar(dto);
-
-        log.trace("End returnDto={}", returnDto);
-        return returnDto;
+        return this.clienteGateway.criar(dto);
 	}
 	
     private Cliente mapDtoToDomain(ClienteDto dto)  {
@@ -45,6 +41,4 @@ public class CriarClienteUsecaseImpl implements CriarClienteUsecase {
         		.email(dto.getEmail())
         		.build();
     }
-
-	
 }

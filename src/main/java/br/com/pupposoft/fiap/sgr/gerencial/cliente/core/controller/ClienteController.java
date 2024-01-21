@@ -9,9 +9,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUs
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @AllArgsConstructor
 public class ClienteController {
 	
@@ -22,37 +20,23 @@ public class ClienteController {
 	private AlterarClienteUsecase alterarClienteUseCase;
 
 	public ClienteDto obterPorCpf(String cpf) {
-		log.trace("Start cpf={}", cpf);
-		ClienteDto clienteDto = this.obterClienteUseCase.obterPorCpf(cpf);
-		log.trace("End clienteDto={}", clienteDto);
-		return clienteDto;
+		return obterClienteUseCase.obterPorCpf(cpf);
 	}
 
 	public ClienteDto obterPorEmail(String email) {
-		log.trace("Start email={}", email);
-		ClienteDto clienteDto = this.obterClienteUseCase.obterPorEmail(email);
-		log.trace("End clienteDto={}", clienteDto);
-		return clienteDto;
+		return this.obterClienteUseCase.obterPorEmail(email);
 	}
 
 	public Long criar(ClienteDto clienteDto) {
-		log.trace("Start clienteDto={}", clienteDto);
 		CriarClienteReturnDto returnDto = this.criarClienteUseCase.criar(CriarClienteParamsDto.builder().cliente(clienteDto).build());
-		Long clienteId = returnDto.getClienteId();
-		log.trace("End clienteId={}", clienteId);
-		return clienteId;
+		return returnDto.getClienteId();
 	}
 
 	public void alterar(ClienteDto clienteDto){
-		log.trace("Start clienteDto={}", clienteDto);
 		alterarClienteUseCase.alterar(AlterarClienteParamsDto.builder().cliente(clienteDto).build());
-		log.trace("End");
 	}
 
 	public ClienteDto obterById(Long clienteId) {
-		log.trace("Start clienteId={}", clienteId);
-		ClienteDto clienteDto = obterClienteUseCase.obterPorId(clienteId);
-		log.trace("End clienteDto={}", clienteDto);
-		return clienteDto;
+		return obterClienteUseCase.obterPorId(clienteId);
 	}
 }

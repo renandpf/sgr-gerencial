@@ -16,40 +16,27 @@ public class ObterClienteUsecaseImpl implements ObterClienteUsecase {
 
 	@Override
 	public ClienteDto obterPorId(Long id) {
-		log.trace("Start id={}", id);
 		Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorId(id);
-		ClienteDto clienteDto = this.getClienteDto(clienteOp);
-		log.trace("End clienteDto={}", clienteDto);
-        return clienteDto;
+		return this.getClienteDto(clienteOp);
 	}
 
 	@Override
 	public ClienteDto obterPorCpf(String cpf) {
-		log.trace("Start cpf={}", cpf);
 		Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorCpf(cpf);
-		ClienteDto clienteDto = this.getClienteDto(clienteOp);
-		log.trace("End clienteDto={}", clienteDto);
-		log.trace("End clienteDto={}", clienteDto);
-        return clienteDto;
+		return this.getClienteDto(clienteOp);
 	}
 
 	@Override
 	public ClienteDto obterPorEmail(String email) {
-		log.trace("Start email={}", email);
 		Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorEmail(email);
-		ClienteDto clienteDto = this.getClienteDto(clienteOp);
-		log.trace("End clienteDto={}", clienteDto);
-        return clienteDto;
+		return this.getClienteDto(clienteOp);
 	}
 
     private ClienteDto getClienteDto(Optional<ClienteDto> clienteOp) {
-    	log.trace("Start clienteOp={}", clienteOp);
         if (clienteOp.isEmpty()) {
         	log.warn("Cliente não encontrado");
             throw new ClienteNaoEncontradoException();
         }
-        ClienteDto clienteDto = clienteOp.get();
-        log.trace("End clienteDto={}", clienteDto);
-        return clienteDto;
+        return clienteOp.get();
     }
 }

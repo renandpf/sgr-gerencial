@@ -19,15 +19,16 @@ import br.com.pupposoft.fiap.sgr.gerencial.produto.adapter.web.json.ProdutoJson;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.controller.ProdutoController;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.domain.Categoria;
 import br.com.pupposoft.fiap.sgr.gerencial.produto.core.dto.ProdutoDto;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("sgr/gerencial")
+@AllArgsConstructor
 public class ProdutoApiController {
 	
-	@Autowired
 	private ProdutoController produtoController;
 	
 	@GetMapping("categorias/{categoria}/produtos")
