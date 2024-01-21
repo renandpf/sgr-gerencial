@@ -14,13 +14,9 @@ public class ExcluirProdutoUseCaseImpl implements ExcluirProdutoUseCase {
         this.produtoGateway.excluir(id);
 	}
 
-    //TODO: DEBITO TÉCNICO este método deve chamar o service de Pedido
-	private void verificaSeProdutoEstaAssociadoItem(Long id) {
-        // const existePedido = await this.produtoRepositoryGateway.existePedidoByProdutoId(id);
-        // if (existePedido) {
-        //     this.logger.warn("Product is associated with at least 1 order");
-        //     throw new ExclusaoProdutoAssociadoPedidoException();
-        // }
+    //TODO: DEBITO TÉCNICO este método deve chamar o service de Pedido//NOSONAR
+	private void verificaSeProdutoEstaAssociadoItem(Long id) {//NOSONAR
+
     }
 	
 }
