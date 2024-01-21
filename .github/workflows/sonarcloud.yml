@@ -63,7 +63,7 @@ jobs:
 
       - name: Verify
         run: |
-          export MAVEN_OPTS="-Dsonar.qualitygate.wait=true -Dsonar.organization=renandpf -Dsonar.projectKey=${{ env.PROJECT_KEY }} -Dsonar.projectName='${{ env.PROJECT_NAME }}' -Dsonar.host.url=${{ env.SONAR_HOST }} -Dsonar.token=${{ env.SONAR_TOKEN }}"
+          export MAVEN_OPTS="-Dsonar.qualitygate.wait=true -Dsonar.organization=renandpf -Dsonar.projectKey=${{ env.PROJECT_KEY }} -Dsonar.projectName=${{ env.PROJECT_NAME }} -Dsonar.host.url=${{ env.SONAR_HOST }} -Dsonar.token=${{ env.SONAR_TOKEN }}"
           mvn clean verify sonar:sonar
     
 
