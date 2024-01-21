@@ -8,6 +8,10 @@
 	<packaging>jar</packaging>
 	<name>Sistema de Gestão de Refeição - Gerencial Service</name>
 
+	<properties>
+		<sonar.projectKey>renandpf_sgr-gerencial</sonar.projectKey>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
