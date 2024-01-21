@@ -2,11 +2,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.wehandle</groupId>
+	<groupId>br.com.pupposoft.fiap</groupId>
 	<artifactId>sgr-gerencial</artifactId>
 	<version>1.2.0</version>
 	<packaging>jar</packaging>
 	<name>Sistema de Gestão de Refeição - Gerencial Service</name>
+
+	<properties>
+		<sonar.projectKey>renandpf_sgr-gerencial</sonar.projectKey>
+	</properties>
 
 	<dependencyManagement>
 		<dependencies>
