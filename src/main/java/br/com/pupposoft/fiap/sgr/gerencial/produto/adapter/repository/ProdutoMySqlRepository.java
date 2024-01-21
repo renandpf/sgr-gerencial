@@ -92,10 +92,6 @@ public class ProdutoMySqlRepository implements ProdutoGateway {
             log.trace("End");
         }
         catch (Exception e) {
-            //TODO: este if deve ser removido assim que o usecase de exclusão verificar a associação de pedido x produto
-//            if(e.code === 'ER_ROW_IS_REFERENCED_2'){//TODO: verificar qual a exceção de contraint
-//                throw new ExclusaoProdutoAssociadoPedidoException();
-//            }
             log.error(e.getMessage(), e);
             throw new ErrorToAccessRepositoryException();
         }
