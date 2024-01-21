@@ -2,6 +2,7 @@ package br.com.pupposoft.fiap.sgr.gerencial.cliente.core.domain;
 
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -29,4 +30,27 @@ class ClienteUnitTest {
 		assertThrows(ClienteValidacaoException.class, () -> cliente.validar());
 	}
 
+	@Test
+	void shouldClienteGetterOnClient() {
+		var id = DataBuilderBase.getRandomLong();
+		var nome = DataBuilderBase.getRandomString();
+		var cpf = DataBuilderBase.getRandomString();
+		var email = DataBuilderBase.getRandomString();
+		
+		Cliente cliente = Cliente.builder()
+				.id(id)
+				.nome(nome)
+				.cpf(cpf)
+				.email(email)
+				.build();
+		
+		assertEquals(id, cliente.getId());
+		assertEquals(nome, cliente.getNome());
+		assertEquals(cpf, cliente.getCpf());
+		assertEquals(email, cliente.getEmail());
+		
+		cliente.toString();
+	}
+
+	
 }
