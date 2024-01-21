@@ -8,17 +8,17 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class ExcluirProdutoUseCaseImpl implements ExcluirProdutoUseCase {
 
-	private ProdutoGateway produtoRepositoryGateway;
+	private ProdutoGateway produtoGateway;
 	
 	@Override
 	public void excluir(Long id) {
         log.trace("Start id={}", id);
         this.verificaSeProdutoEstaAssociadoItem(id);
-        this.produtoRepositoryGateway.excluir(id);
+        this.produtoGateway.excluir(id);
         log.trace("End");
 	}
 
-    //TODO: este método deveria chamar o service de Pedido
+    //TODO: DEBITO TÉCNICO este método deve chamar o service de Pedido
 	private void verificaSeProdutoEstaAssociadoItem(Long id) {
         // const existePedido = await this.produtoRepositoryGateway.existePedidoByProdutoId(id);
         // if (existePedido) {

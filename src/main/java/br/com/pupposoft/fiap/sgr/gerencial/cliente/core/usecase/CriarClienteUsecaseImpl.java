@@ -6,6 +6,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.domain.Cliente;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.ClienteDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteParamsDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteReturnDto;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.exception.ClienteExistenteException;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.gateway.ClienteGateway;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class CriarClienteUsecaseImpl implements CriarClienteUsecase {
 	
-	private ClienteGateway clienteRepositoryGateway;
+	private ClienteGateway clienteGateway;
 
 	@Override
 	public CriarClienteReturnDto criar(CriarClienteParamsDto dto) {
@@ -23,14 +24,14 @@ public class CriarClienteUsecaseImpl implements CriarClienteUsecase {
 
         clienteReq.validar();
 
-        Optional<ClienteDto> clienteOp = this.clienteRepositoryGateway.obterPorCpf(clienteReq.getCpf());
+        Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorCpf(clienteReq.getCpf());
 
-        if (!clienteOp.isEmpty()) {
-        	//FIXME
-            //throw new ClienteExistenteException();
+        if (clienteOp.isPresent()) {
+        	log.warn("Cliente ja cadastro no sistema com o CPF informado.");
+            throw new ClienteExistenteException();
         }
 
-        CriarClienteReturnDto returnDto = this.clienteRepositoryGateway.criar(dto);
+        CriarClienteReturnDto returnDto = this.clienteGateway.criar(dto);
 
         log.trace("End returnDto={}", returnDto);
         return returnDto;

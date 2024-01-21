@@ -18,21 +18,21 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsec
 public class GerencialClienteDIConfiguration {
 
 	@Autowired
-	private ClienteGateway clienteRepositoryGateway;
+	private ClienteGateway clienteGateway;
 	
 	@Bean
 	public ObterClienteUsecase obterClienteUsecase() {
-		return new ObterClienteUsecaseImpl(clienteRepositoryGateway);
+		return new ObterClienteUsecaseImpl(clienteGateway);
 	}
 	
 	@Bean
 	public CriarClienteUsecase criarClienteUsecase() {
-		return new CriarClienteUsecaseImpl(clienteRepositoryGateway);
+		return new CriarClienteUsecaseImpl(clienteGateway);
 	}
 
 	@Bean
 	public AlterarClienteUsecase alterarClienteUsecase() {
-		return new AlterarClienteUsecaseImpl(clienteRepositoryGateway);
+		return new AlterarClienteUsecaseImpl(clienteGateway);
 	}
 	
 	@Bean

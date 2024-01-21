@@ -20,26 +20,26 @@ import br.com.pupposoft.fiap.sgr.gerencial.produto.core.usecase.ObterProdutoUseC
 public class GerencialProdutoDIConfiguration {
 
 	@Autowired
-	private ProdutoGateway produtoRepositoryGateway;
+	private ProdutoGateway produtoGateway;
 	
 	@Bean
 	public ObterProdutoUseCase obterProdutoUseCase() {
-		return new ObterProdutoUseCaseImpl(produtoRepositoryGateway);
+		return new ObterProdutoUseCaseImpl(produtoGateway);
 	}
 	
 	@Bean
 	public CriarProdutoUseCase criarProdutoUseCase() {
-		return new CriarProdutoUseCaseImpl(produtoRepositoryGateway);
+		return new CriarProdutoUseCaseImpl(produtoGateway);
 	}
 
 	@Bean
 	public AlterarProdutoUseCase alterarProdutoUseCase() {
-		return new AlterarProdutoUseCaseImpl(produtoRepositoryGateway);
+		return new AlterarProdutoUseCaseImpl(produtoGateway);
 	}
 	
 	@Bean
 	public ExcluirProdutoUseCase excluirProdutoUseCase() {
-		return new ExcluirProdutoUseCaseImpl(produtoRepositoryGateway);
+		return new ExcluirProdutoUseCaseImpl(produtoGateway);
 	}
 	
 	@Bean

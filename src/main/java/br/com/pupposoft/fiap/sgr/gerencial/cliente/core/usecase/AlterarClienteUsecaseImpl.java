@@ -15,22 +15,22 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class AlterarClienteUsecaseImpl implements AlterarClienteUsecase {
 	
-	private ClienteGateway clienteRepositoryGateway;
+	private ClienteGateway clienteGateway;
 
 	public AlterarClienteReturnDto alterar(AlterarClienteParamsDto paramsDto) {
 		log.trace("Start paramsDto={}", paramsDto);
-        Cliente cliente = this.mapDtoToDomain(paramsDto.getCliente());
+        Cliente cliente = mapDtoToDomain(paramsDto.getCliente());
 
         cliente.validar();
 
-        Optional<ClienteDto> clienteOp = this.clienteRepositoryGateway.obterPorId(cliente.getId());
+        Optional<ClienteDto> clienteOp = this.clienteGateway.obterPorId(cliente.getId());
         
         if (clienteOp.isEmpty()) {
         	log.warn("Cliente não encontrado: cpf={}", paramsDto.getCliente().getCpf());
             throw new ClienteNaoEncontradoException();
         }
         
-        AlterarClienteReturnDto returnDto = this.clienteRepositoryGateway.alterar(paramsDto);
+        AlterarClienteReturnDto returnDto = this.clienteGateway.alterar(paramsDto);
         
         log.trace("End returnDto={}", returnDto);
         return returnDto;

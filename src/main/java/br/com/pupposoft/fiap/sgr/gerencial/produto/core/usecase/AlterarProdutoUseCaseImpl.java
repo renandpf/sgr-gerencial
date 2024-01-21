@@ -10,12 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class AlterarProdutoUseCaseImpl implements AlterarProdutoUseCase {
 
-	private ProdutoGateway produtoRepositoryGateway;
+	private ProdutoGateway produtoGateway;
 	
 	@Override
 	public AlterarProdutoReturnDto alterar(AlterarProdutoParamsDto dto) {
         log.trace("Start dto={}", dto);
-        this.produtoRepositoryGateway.alterar(dto.getProduto());
+        this.produtoGateway.alterar(dto.getProduto());
         AlterarProdutoReturnDto returnDto = new AlterarProdutoReturnDto();
         log.trace("End returnDto={}", returnDto);
         return returnDto;
