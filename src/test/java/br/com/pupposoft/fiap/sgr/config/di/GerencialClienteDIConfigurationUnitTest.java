@@ -14,6 +14,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.controller.ClienteContro
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.gateway.ClienteGateway;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecase;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ExcluirClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,6 +41,14 @@ class GerencialClienteDIConfigurationUnitTest {
 	@Test
 	void shouldSucessOnAlterarClienteUsecase() {
 		AlterarClienteUsecase usecase = gerencialClienteDIConfiguration.alterarClienteUsecase();
+		assertEquals(clienteGateway, getField(usecase, "clienteGateway"));
+	}
+	
+	@Test
+	void shouldSucessOnExcluirClienteUsecase() {
+		ObterClienteUsecase obterClienteUsecase = Mockito.mock(ObterClienteUsecase.class);
+		ExcluirClienteUsecase usecase = gerencialClienteDIConfiguration.excluirClienteUsecase(obterClienteUsecase);
+		assertEquals(obterClienteUsecase, getField(usecase, "obterClienteUsecase"));
 		assertEquals(clienteGateway, getField(usecase, "clienteGateway"));
 	}
 	
