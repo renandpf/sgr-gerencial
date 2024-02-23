@@ -1,5 +1,6 @@
 package br.com.pupposoft.fiap.sgr.config.database.gerencial.repository;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ClienteEntity;
+import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.StatusCadastro;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -71,5 +73,37 @@ class ClienteEntityRepositoryIntTest {
     	
     	Optional<ClienteEntity> clienteEntityCFoundOP = clienteEntityRepository.findByEmail("ccc");
     	assertTrue(clienteEntityCFoundOP.isEmpty());
+    }
+    
+    @Test
+    void shouldSucessOnSaveUserToBeDeleted() {
+    	ClienteEntity clienteEntityABefore = ClienteEntity.builder()
+    			.nome("any nome")
+    			.cpf("any cpf")
+    			.endereco("any endereço")
+    			.telefone("any telefone")
+    			.email("aaa")
+    			.statusCadastro(StatusCadastro.ATIVO)
+    			.build();
+    	
+    	entityManager.persist(clienteEntityABefore);
+    	
+    	ClienteEntity clienteEntityAAfter = ClienteEntity.builder()
+    			.id(clienteEntityABefore.getId())
+    			.statusCadastro(StatusCadastro.INATIVO)
+    			.build();
+    	
+    	clienteEntityRepository.save(clienteEntityAAfter);
+    	
+    	Optional<ClienteEntity> clienteEntityAFoundOP = clienteEntityRepository.findById(clienteEntityAAfter.getId());
+    	assertTrue(clienteEntityAFoundOP.isPresent());
+    	
+    	ClienteEntity clientEntitySaved = clienteEntityAFoundOP.get();
+		assertNull(clientEntitySaved.getNome());
+		assertNull(clientEntitySaved.getCpf());
+		assertNull(clientEntitySaved.getEndereco());
+		assertNull(clientEntitySaved.getTelefone());
+		assertNull(clientEntitySaved.getEmail());
+		assertEquals(StatusCadastro.INATIVO, clientEntitySaved.getStatusCadastro());
     }
 }

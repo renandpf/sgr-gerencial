@@ -19,5 +19,7 @@ public interface ClienteGateway {
 	CriarClienteReturnDto criar(CriarClienteParamsDto dto);
 
 	Optional<ClienteDto> obterPorId(Long id);
+	
+	void excluirPorId(Long id);
 
 }
