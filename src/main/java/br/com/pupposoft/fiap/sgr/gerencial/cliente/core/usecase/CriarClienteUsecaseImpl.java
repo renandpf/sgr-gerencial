@@ -2,6 +2,7 @@ package br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase;
 
 import java.util.Optional;
 
+import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.StatusCadastro;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.domain.Cliente;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.ClienteDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteParamsDto;
@@ -29,7 +30,9 @@ public class CriarClienteUsecaseImpl implements CriarClienteUsecase {
         	log.warn("Cliente ja cadastro no sistema com o CPF informado.");
             throw new ClienteExistenteException();
         }
-
+        
+        dto.getCliente().setStatusCadastro(StatusCadastro.ATIVO);
+        
         return this.clienteGateway.criar(dto);
 	}
 	
@@ -39,6 +42,9 @@ public class CriarClienteUsecaseImpl implements CriarClienteUsecase {
         		.nome(dto.getNome())
         		.cpf(dto.getCpf())
         		.email(dto.getEmail())
+        		.endereco(dto.getEndereco())
+        		.telefone(dto.getTelefone())
+        		.statusCadastro(StatusCadastro.ATIVO)
         		.build();
     }
 }
