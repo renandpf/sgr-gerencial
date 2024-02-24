@@ -7,6 +7,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClientePa
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteReturnDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecase;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ExcluirClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 import lombok.AllArgsConstructor;
 
@@ -18,6 +19,8 @@ public class ClienteController {
 	private CriarClienteUsecase criarClienteUseCase;
 
 	private AlterarClienteUsecase alterarClienteUseCase;
+	
+	private ExcluirClienteUsecase excluirClienteUseCase;
 
 	public ClienteDto obterPorCpf(String cpf) {
 		return obterClienteUseCase.obterPorCpf(cpf);
@@ -38,5 +41,9 @@ public class ClienteController {
 
 	public ClienteDto obterById(Long clienteId) {
 		return obterClienteUseCase.obterPorId(clienteId);
+	}
+	
+	public void excluir(Long clienteId){
+		excluirClienteUseCase.excluir(clienteId);
 	}
 }

@@ -57,14 +57,16 @@ class GerencialClienteDIConfigurationUnitTest {
 		ObterClienteUsecase obterClienteUsecase = Mockito.mock(ObterClienteUsecase.class);
 		CriarClienteUsecase criarClienteUsecase = Mockito.mock(CriarClienteUsecase.class);
 		AlterarClienteUsecase alterarClienteUsecase = Mockito.mock(AlterarClienteUsecase.class);
+		ExcluirClienteUsecase excluirClienteUsecase = Mockito.mock(ExcluirClienteUsecase.class);
 		
 		ClienteController clienteController = 
 				gerencialClienteDIConfiguration
-					.clienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase);
+					.clienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase, excluirClienteUsecase);
 		
 		assertEquals(obterClienteUsecase, getField(clienteController, "obterClienteUseCase"));
 		assertEquals(criarClienteUsecase, getField(clienteController, "criarClienteUseCase"));
 		assertEquals(alterarClienteUsecase, getField(clienteController, "alterarClienteUseCase"));
+		assertEquals(excluirClienteUsecase, getField(clienteController, "excluirClienteUseCase"));
 		
 		
 	}

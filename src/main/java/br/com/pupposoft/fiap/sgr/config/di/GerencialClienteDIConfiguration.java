@@ -47,8 +47,8 @@ public class GerencialClienteDIConfiguration {
 	
 	@Bean
 	@Autowired
-	@DependsOn({"obterClienteUsecase", "criarClienteUsecase", "alterarClienteUsecase"})
-	public ClienteController clienteController(ObterClienteUsecase obterClienteUsecase, CriarClienteUsecase criarClienteUsecase, AlterarClienteUsecase alterarClienteUsecase) {
-		return new ClienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase);
+	@DependsOn({"obterClienteUsecase", "criarClienteUsecase", "alterarClienteUsecase", "excluirClienteUsecase"})
+	public ClienteController clienteController(ObterClienteUsecase obterClienteUsecase, CriarClienteUsecase criarClienteUsecase, AlterarClienteUsecase alterarClienteUsecase, ExcluirClienteUsecase excluirClienteUsecase) {
+		return new ClienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase, excluirClienteUsecase);
 	}
 }

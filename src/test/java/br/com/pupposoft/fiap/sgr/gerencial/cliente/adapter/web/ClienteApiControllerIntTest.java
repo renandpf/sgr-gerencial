@@ -10,6 +10,7 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -217,5 +218,17 @@ class ClienteApiControllerIntTest {
 			.andExpect(content().json("{\"id\":1,\"nome\":\"cliente nome\",\"cpf\":\"000\",\"email\":\"cliente@mail.com\"}"));
 		
 		verify(clienteController).obterById(param);
+	}
+	
+	@Test
+	void shouldSucessOnDeleteById() throws Exception {
+		final Long param = 1L;
+		
+		this.mockMvc.perform(delete("/sgr/gerencial/clientes/" + param))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(content().string(""));
+		
+		verify(clienteController).excluir(param);
 	}
 }
