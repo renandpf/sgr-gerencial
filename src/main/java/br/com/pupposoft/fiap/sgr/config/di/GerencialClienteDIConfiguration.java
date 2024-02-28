@@ -11,6 +11,8 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUs
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUsecaseImpl;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecaseImpl;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ExcluirClienteUseCaseImpl;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ExcluirClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecaseImpl;
 import lombok.AllArgsConstructor;
@@ -37,9 +39,16 @@ public class GerencialClienteDIConfiguration {
 	}
 	
 	@Bean
+	@DependsOn({"obterClienteUsecase"})
 	@Autowired
-	@DependsOn({"obterClienteUsecase", "criarClienteUsecase", "alterarClienteUsecase"})
-	public ClienteController clienteController(ObterClienteUsecase obterClienteUsecase, CriarClienteUsecase criarClienteUsecase, AlterarClienteUsecase alterarClienteUsecase) {
-		return new ClienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase);
+	public ExcluirClienteUsecase excluirClienteUsecase(ObterClienteUsecase obterClienteUsecase) {
+		return new ExcluirClienteUseCaseImpl(obterClienteUsecase, clienteGateway);
+	}
+	
+	@Bean
+	@Autowired
+	@DependsOn({"obterClienteUsecase", "criarClienteUsecase", "alterarClienteUsecase", "excluirClienteUsecase"})
+	public ClienteController clienteController(ObterClienteUsecase obterClienteUsecase, CriarClienteUsecase criarClienteUsecase, AlterarClienteUsecase alterarClienteUsecase, ExcluirClienteUsecase excluirClienteUsecase) {
+		return new ClienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase, excluirClienteUsecase);
 	}
 }

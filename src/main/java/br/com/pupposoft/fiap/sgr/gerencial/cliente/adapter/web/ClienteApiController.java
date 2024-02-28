@@ -2,6 +2,7 @@ package br.com.pupposoft.fiap.sgr.gerencial.cliente.adapter.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,6 +69,13 @@ public class ClienteApiController {
 		ClienteJson clienteJson = mapDtoToJson(clienteDto);
 		log.trace("End clienteJson={}", clienteJson);
 		return clienteJson;
+	}
+	
+	@DeleteMapping("clientes/{clienteId}")
+	public void deleteById(@PathVariable("clienteId") Long clienteId) {
+		log.trace("Start clienteId={}", clienteId);
+		clienteController.excluir(clienteId);
+		log.trace("End");
 	}
 	
 	private ClienteJson mapDtoToJson(ClienteDto dto) {

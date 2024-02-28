@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ClienteEntity;
+import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.StatusCadastro;
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.repository.ClienteEntityRepository;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.ClienteDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.AlterarClienteParamsDto;
@@ -83,6 +84,22 @@ public class ClienteMySqlRepository implements ClienteGateway {
 		}	
 	}
 
+	@Override
+	public void excluirPorId(Long id) {
+		try {
+			ClienteEntity crientToBeRemove = ClienteEntity.builder()
+					.id(id)
+					.statusCadastro(StatusCadastro.INATIVO)
+					.build();
+
+			clienteEntityRepository.save(crientToBeRemove);
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessRepositoryException();
+		}	
+	}
+	
 	private Optional<ClienteDto> mapEntityOpToDtoOp(Optional<ClienteEntity> clientEntityOp) {
 		return clientEntityOp.isPresent() ? Optional.of(mapEntityToDto(clientEntityOp.get())) : Optional.empty();
 	}
@@ -94,6 +111,9 @@ public class ClienteMySqlRepository implements ClienteGateway {
 				.nome(dto.getNome())
 				.cpf(dto.getCpf())
 				.email(dto.getEmail())
+				.endereco(dto.getEndereco())
+				.telefone(dto.getTelefone())
+				.statusCadastro(dto.getStatusCadastro())
 				.build();
 	}
 	
@@ -106,5 +126,4 @@ public class ClienteMySqlRepository implements ClienteGateway {
 				.email(entity.getEmail())
 				.build();
 	}
-	
 }

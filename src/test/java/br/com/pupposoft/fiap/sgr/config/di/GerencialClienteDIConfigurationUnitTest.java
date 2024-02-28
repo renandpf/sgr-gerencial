@@ -14,6 +14,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.controller.ClienteContro
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.gateway.ClienteGateway;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecase;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ExcluirClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,18 +45,28 @@ class GerencialClienteDIConfigurationUnitTest {
 	}
 	
 	@Test
+	void shouldSucessOnExcluirClienteUsecase() {
+		ObterClienteUsecase obterClienteUsecase = Mockito.mock(ObterClienteUsecase.class);
+		ExcluirClienteUsecase usecase = gerencialClienteDIConfiguration.excluirClienteUsecase(obterClienteUsecase);
+		assertEquals(obterClienteUsecase, getField(usecase, "obterClienteUsecase"));
+		assertEquals(clienteGateway, getField(usecase, "clienteGateway"));
+	}
+	
+	@Test
 	void shouldSucessOnClienteController() {
 		ObterClienteUsecase obterClienteUsecase = Mockito.mock(ObterClienteUsecase.class);
 		CriarClienteUsecase criarClienteUsecase = Mockito.mock(CriarClienteUsecase.class);
 		AlterarClienteUsecase alterarClienteUsecase = Mockito.mock(AlterarClienteUsecase.class);
+		ExcluirClienteUsecase excluirClienteUsecase = Mockito.mock(ExcluirClienteUsecase.class);
 		
 		ClienteController clienteController = 
 				gerencialClienteDIConfiguration
-					.clienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase);
+					.clienteController(obterClienteUsecase, criarClienteUsecase, alterarClienteUsecase, excluirClienteUsecase);
 		
 		assertEquals(obterClienteUsecase, getField(clienteController, "obterClienteUseCase"));
 		assertEquals(criarClienteUsecase, getField(clienteController, "criarClienteUseCase"));
 		assertEquals(alterarClienteUsecase, getField(clienteController, "alterarClienteUseCase"));
+		assertEquals(excluirClienteUsecase, getField(clienteController, "excluirClienteUseCase"));
 		
 		
 	}

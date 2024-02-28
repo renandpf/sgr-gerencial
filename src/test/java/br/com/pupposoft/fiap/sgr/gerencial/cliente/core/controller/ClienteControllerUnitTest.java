@@ -18,6 +18,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClientePa
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteReturnDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.AlterarClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.CriarClienteUsecase;
+import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ExcluirClienteUsecase;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.usecase.ObterClienteUsecase;
 import br.com.pupposoft.fiap.test.databuilder.DataBuilderBase;
 
@@ -35,6 +36,9 @@ class ClienteControllerUnitTest {
 
 	@Mock
 	private AlterarClienteUsecase alterarClienteUseCase;
+	
+	@Mock
+	private ExcluirClienteUsecase excluirClienteUseCase;
 
 	@Test
 	void shouldSuccessOnObterPorCpf() {
@@ -109,5 +113,14 @@ class ClienteControllerUnitTest {
 		assertEquals(clienteDtoExistent, clienteDtoReturned);
 		
 		verify(obterClienteUseCase).obterPorId(clienteId);
+	}
+	
+	@Test
+	void shouldSuccessOnExcluir() {
+		final Long clienteId = DataBuilderBase.getRandomLong();
+		
+		clienteController.excluir(clienteId);
+		
+		verify(excluirClienteUseCase).excluir(clienteId);
 	}
 }

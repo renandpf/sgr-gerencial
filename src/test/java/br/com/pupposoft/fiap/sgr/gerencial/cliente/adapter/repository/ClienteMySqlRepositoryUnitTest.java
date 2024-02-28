@@ -1,5 +1,6 @@
 package br.com.pupposoft.fiap.sgr.gerencial.cliente.adapter.repository;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.ClienteEntity;
+import br.com.pupposoft.fiap.sgr.config.database.gerencial.entity.StatusCadastro;
 import br.com.pupposoft.fiap.sgr.config.database.gerencial.repository.ClienteEntityRepository;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.ClienteDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.AlterarClienteParamsDto;
@@ -27,7 +29,7 @@ import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClientePa
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.dto.flows.CriarClienteReturnDto;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.exception.ErrorToAccessRepositoryException;
 import br.com.pupposoft.fiap.sgr.gerencial.cliente.core.gateway.ClienteGateway;
-import br.com.pupposoft.fiap.test.databuilder.DataBuilderBase;
+import static br.com.pupposoft.fiap.test.databuilder.DataBuilderBase.*;
 
 @ExtendWith(MockitoExtension.class)
 class ClienteMySqlRepositoryUnitTest {
@@ -40,13 +42,13 @@ class ClienteMySqlRepositoryUnitTest {
 	
 	@Test
 	void shouldSucessOnObterPorCpf() {
-		final String cpfParam = DataBuilderBase.getRandomString();
+		final String cpfParam = getRandomString();
 		
 		ClienteEntity clienteEntityExistente = ClienteEntity.builder()
-				.id(DataBuilderBase.getRandomLong())
-				.nome(DataBuilderBase.getRandomString())
-				.cpf(DataBuilderBase.getRandomString())
-				.email(DataBuilderBase.getRandomString())
+				.id(getRandomLong())
+				.nome(getRandomString())
+				.cpf(getRandomString())
+				.email(getRandomString())
 				.build();
 		doReturn(Optional.of(clienteEntityExistente))
 			.when(clienteEntityRepository).findByCpf(cpfParam);
@@ -65,7 +67,7 @@ class ClienteMySqlRepositoryUnitTest {
 	
 	@Test
 	void shouldSucessButNotFounfOnObterPorCpf() {
-		final String cpfParam = DataBuilderBase.getRandomString();
+		final String cpfParam = getRandomString();
 		
 		doReturn(Optional.empty()).when(clienteEntityRepository).findByCpf(cpfParam);
 		
@@ -78,7 +80,7 @@ class ClienteMySqlRepositoryUnitTest {
 	
 	@Test
 	void shouldErrorToAccessRepositoryExceptionOnObterPorCpf() {
-		final String cpfParam = DataBuilderBase.getRandomString();
+		final String cpfParam = getRandomString();
 		doThrow(new RuntimeException()).when(clienteEntityRepository).findByCpf(cpfParam);
 		assertThrows(ErrorToAccessRepositoryException.class, () -> clienteGateway.obterPorCpf(cpfParam));
 		verify(clienteEntityRepository).findByCpf(cpfParam);
@@ -86,13 +88,13 @@ class ClienteMySqlRepositoryUnitTest {
 	
 	@Test
 	void shouldSucessOnobterPorEmail() {
-		final String emailParam = DataBuilderBase.getRandomString();
+		final String emailParam = getRandomString();
 		
 		ClienteEntity clienteEntityExistente = ClienteEntity.builder()
-				.id(DataBuilderBase.getRandomLong())
-				.nome(DataBuilderBase.getRandomString())
-				.cpf(DataBuilderBase.getRandomString())
-				.email(DataBuilderBase.getRandomString())
+				.id(getRandomLong())
+				.nome(getRandomString())
+				.cpf(getRandomString())
+				.email(getRandomString())
 				.build();
 		doReturn(Optional.of(clienteEntityExistente))
 			.when(clienteEntityRepository).findByEmail(emailParam);
@@ -111,7 +113,7 @@ class ClienteMySqlRepositoryUnitTest {
 	
 	@Test
 	void shouldErrorToAccessRepositoryExceptionOnObterPorEmail() {
-		final String emailParam = DataBuilderBase.getRandomString();
+		final String emailParam = getRandomString();
 		doThrow(new RuntimeException()).when(clienteEntityRepository).findByEmail(emailParam);
 		assertThrows(ErrorToAccessRepositoryException.class, () -> clienteGateway.obterPorEmail(emailParam));
 		verify(clienteEntityRepository).findByEmail(emailParam);
@@ -119,13 +121,13 @@ class ClienteMySqlRepositoryUnitTest {
 	
 	@Test
 	void shouldSucessOnObterPorId() {
-		final Long clientIdParam = DataBuilderBase.getRandomLong();
+		final Long clientIdParam = getRandomLong();
 		
 		ClienteEntity clienteEntityExistente = ClienteEntity.builder()
-				.id(DataBuilderBase.getRandomLong())
-				.nome(DataBuilderBase.getRandomString())
-				.cpf(DataBuilderBase.getRandomString())
-				.email(DataBuilderBase.getRandomString())
+				.id(getRandomLong())
+				.nome(getRandomString())
+				.cpf(getRandomString())
+				.email(getRandomString())
 				.build();
 		doReturn(Optional.of(clienteEntityExistente))
 			.when(clienteEntityRepository).findById(clientIdParam);
@@ -144,7 +146,7 @@ class ClienteMySqlRepositoryUnitTest {
 	
 	@Test
 	void shouldErrorToAccessRepositoryExceptionOnObterPorId() {
-		final Long clienteIdParam = DataBuilderBase.getRandomLong();
+		final Long clienteIdParam = getRandomLong();
 		doThrow(new RuntimeException()).when(clienteEntityRepository).findById(clienteIdParam);
 		assertThrows(ErrorToAccessRepositoryException.class, () -> clienteGateway.obterPorId(clienteIdParam));
 		verify(clienteEntityRepository).findById(clienteIdParam);
@@ -154,10 +156,10 @@ class ClienteMySqlRepositoryUnitTest {
 	void shouldSucessOnCriar() {
 		
 		ClienteDto clienteToBeCreate = ClienteDto.builder()
-				.id(DataBuilderBase.getRandomLong())
-				.nome(DataBuilderBase.getRandomString())
-				.cpf(DataBuilderBase.getRandomString())
-				.email(DataBuilderBase.getRandomString())
+				.id(getRandomLong())
+				.nome(getRandomString())
+				.cpf(getRandomString())
+				.email(getRandomString())
 				.build();
 		
 		CriarClienteParamsDto criarClienteParamsDto = CriarClienteParamsDto.builder()
@@ -197,10 +199,10 @@ class ClienteMySqlRepositoryUnitTest {
 	void shouldSucessOnAlterar() {
 		
 		ClienteDto clienteToBeUpdate = ClienteDto.builder()
-				.id(DataBuilderBase.getRandomLong())
-				.nome(DataBuilderBase.getRandomString())
-				.cpf(DataBuilderBase.getRandomString())
-				.email(DataBuilderBase.getRandomString())
+				.id(getRandomLong())
+				.nome(getRandomString())
+				.cpf(getRandomString())
+				.email(getRandomString())
 				.build();
 		
 		AlterarClienteParamsDto alterarClienteParamsDto = AlterarClienteParamsDto.builder()
@@ -233,6 +235,37 @@ class ClienteMySqlRepositoryUnitTest {
 		AlterarClienteParamsDto alterarClienteParamsDto = AlterarClienteParamsDto.builder().cliente(ClienteDto.builder().build()).build();
 		
 		assertThrows(ErrorToAccessRepositoryException.class, () -> clienteGateway.alterar(alterarClienteParamsDto));
+		verify(clienteEntityRepository).save(any(ClienteEntity.class));
+	}
+	
+	@Test
+	void shouldSucessExcluirPorId() {
+		final Long clientIdParam = getRandomLong();
+		
+		clienteGateway.excluirPorId(clientIdParam);
+		
+		ArgumentCaptor<ClienteEntity> clientEntityAC = ArgumentCaptor.forClass(ClienteEntity.class);
+		
+		verify(clienteEntityRepository).save(clientEntityAC.capture());
+		
+		ClienteEntity clientEntitySaved = clientEntityAC.getValue();
+		
+		assertEquals(clientIdParam,  clientEntitySaved.getId());
+		assertNull(clientEntitySaved.getNome());
+		assertNull(clientEntitySaved.getCpf());
+		assertNull(clientEntitySaved.getEndereco());
+		assertNull(clientEntitySaved.getTelefone());
+		assertNull(clientEntitySaved.getEmail());
+		assertEquals(StatusCadastro.INATIVO, clientEntitySaved.getStatusCadastro());
+	}
+	
+	@Test
+	void shouldErrorExcluirPorId() {
+		final Long clientIdParam = getRandomLong();
+		
+		doThrow(new RuntimeException()).when(clienteEntityRepository).save(any(ClienteEntity.class));
+		
+		assertThrows(ErrorToAccessRepositoryException.class, () -> clienteGateway.excluirPorId(clientIdParam));
 		verify(clienteEntityRepository).save(any(ClienteEntity.class));
 	}
 	
