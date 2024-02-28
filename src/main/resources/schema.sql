@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `sgr_gerencial_database`.`Cliente` (
   `telefone` varchar(45) DEFAULT NULL,
   `statusCadastro` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 
 CREATE TABLE IF NOT EXISTS `sgr_gerencial_database`.`Produto` (
@@ -18,4 +18,4 @@ CREATE TABLE IF NOT EXISTS `sgr_gerencial_database`.`Produto` (
   `valor` float NOT NULL,
   `categoriaId` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
