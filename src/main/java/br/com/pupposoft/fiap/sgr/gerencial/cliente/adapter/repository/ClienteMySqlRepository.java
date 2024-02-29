@@ -124,6 +124,7 @@ public class ClienteMySqlRepository implements ClienteGateway {
 				.nome(entity.getNome())
 				.cpf(entity.getCpf())
 				.email(entity.getEmail())
+				.telefone(entity.getTelefone())
 				.build();
 	}
 }

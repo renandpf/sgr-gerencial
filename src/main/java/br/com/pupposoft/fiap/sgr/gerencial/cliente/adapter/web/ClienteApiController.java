@@ -84,6 +84,7 @@ public class ClienteApiController {
 				.nome(dto.getNome())
 				.cpf(dto.getCpf())
 				.email(dto.getEmail())
+				.telefone(dto.getTelefone())
 				.build();
 	}
 	
