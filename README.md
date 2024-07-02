@@ -70,15 +70,15 @@ mvn clean install
 **DOCKER: GERAR BUILD**
 
 ```sh
-docker build -t renandpf/sgr-service-spring:2.0.0 .
+docker build -t renandpf/sgr-gerencial:1.4.0 .
 ```
 
 ```sh
-docker tag renandpf/sgr-service-spring:2.0.0 renandpf/sgr-service-spring:2.0.0
+docker tag renandpf/sgr-gerencial:1.4.0 renandpf/sgr-gerencial:1.4.0
 ```
 
 ```sh
-docker push renandpf/sgr-service-spring:2.0.0
+docker push renandpf/sgr-gerencial:1.4.0
 ```
 
 **MINIKUBE**
@@ -98,27 +98,27 @@ NOTA: foi utilizado o minikube para testes
 NOTA: recomendado que o banco de dados deve estar up (vide readme do projeto do banco de dado). Deve executar nesta ordem
 
 ```sh
-kubectl apply -f sgr-service-spring-cm.yaml
+kubectl apply -f sgr-gerencial-cm.yaml
 ```
 
 ```sh
-kubectl apply -f sgr-service-spring-secrets.yaml
+kubectl apply -f sgr-gerencial-secrets.yaml
 ```
 
 ```sh
-kubectl apply -f sgr-service-spring-svc.yaml
+kubectl apply -f sgr-gerencial-svc.yaml
 ```
 
 ```sh
-kubectl apply -f sgr-service-spring-deploy.yaml
+kubectl apply -f sgr-gerencial-deploy.yaml
 ```
 
 ```sh
-kubectl apply -f sgr-service-spring-metrics.yaml
+kubectl apply -f sgr-gerencial-metrics.yaml
 ```
 
 ```sh
-kubectl apply -f sgr-service-spring-hpa.yaml
+kubectl apply -f sgr-gerencial-hpa.yaml
 ```
 
 # DETALHAMENTO DA API

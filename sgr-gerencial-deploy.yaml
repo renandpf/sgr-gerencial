@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sgr-gerencial-deployment
+  labels:
+    app: sgr-gerencial-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sgr-gerencial
+  template:
+    metadata:
+      labels:
+        app: sgr-gerencial
+    spec:
+      containers:
+        - name: sgr-gerencial
+          image: renandpf/sgr-gerencial:1.4.0
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
+          resources:
+            requests:
+              cpu: 1m
+          envFrom:
+            - configMapRef:
+                name: sgr-gerencial-cm
+          env:
+            - name: spring_datasource_password
+              valueFrom:
+                secretKeyRef:
+                  name: sgr-gerencial-secrets
+                  key: password
