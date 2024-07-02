@@ -8,5 +8,5 @@ spec:
     port: 80
     targetPort: 8080
   selector:
-    app: sgr-gerencial-spring
+    app: sgr-gerencial
   type: NodePort
